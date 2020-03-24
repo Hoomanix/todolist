@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div>
+      <ion-title>
+        <ion-button color="light" float-left (click)="retourPagetodo()" ><ion-icon name="arrow-back"> </ion-icon> </ion-button> &nbsp;AddItem</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="addItem()" #addListForm="ngForm">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Title <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required id="title" type="text" name="title" [(ngModel)]="title" #ctrlTitle="ngModel">
+        </ion-input>
+        <ion-text [hidden]="ctrlTitle.valid || ctrlTitle.pristine " color="danger">Title is required</ion-text>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addListForm.valid">
+        Add item</ion-button>
+    </div>
+  </form>
+</ion-content>

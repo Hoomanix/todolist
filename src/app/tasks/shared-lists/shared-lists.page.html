@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-buttons>
+                <ion-menu-button menu="menu_1"></ion-menu-button>
+            </ion-buttons>
+        </ion-buttons>
+        <ion-title>Shared Lists</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+    <ion-list *ngIf="getListReaders().length>0; else contenu_pas_bon">
+        <ion-item>
+            <ion-label color="danger">
+                Partagé avec moi en Lecture
+            </ion-label>
+        </ion-item>
+        <ion-item-sliding *ngFor="let item of getListReaders(); let i = index">
+            <ion-item>
+                <ion-label (click)="Afficherhtml(item?.id)">
+                    <h2> {{ item?.title}}</h2>
+                </ion-label>
+                <ion-button color="dark" (click)=shareTodo(item?.id)>
+                    <ion-icon name="share"></ion-icon>
+                </ion-button>
+            </ion-item>
+            <ion-item-options side="end">
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-list *ngIf="getListWriters().length>0; else contenu_pas_vide">
+        <ion-item>
+            <ion-label color="danger">
+                Partagé avec moi en Ecriture
+            </ion-label>
+        </ion-item>
+        <ion-item-sliding *ngFor="let item of getListWriters(); let i = index">
+            <ion-item>
+                <ion-label (click)="Afficherhtml(item?.id)">
+                    <h2> {{ item?.title}}</h2>
+                </ion-label>
+                <!-- <ion-button color="dark" (click)=onShareTodo(item?.id)>
+                   <ion-icon name="share"></ion-icon>
+                 </ion-button>-->
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
+    <ng-template #contenu_pas_bon>
+        <ion-item>
+            <ion-label color="danger">
+                Partagé avec moi en Lecture
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                (vide)
+            </ion-label>
+        </ion-item>
+    </ng-template>
+
+    <ng-template #contenu_pas_vide>
+        <ion-item>
+            <ion-label color="danger">
+                Partagé avec moi en Ecriture
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                (vide)
+            </ion-label>
+        </ion-item>
+    </ng-template>
+</ion-content>

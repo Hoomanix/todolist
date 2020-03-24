@@ -41,7 +41,7 @@ export class ResetPassPage implements OnInit {
     console.log(value.email);
     return firebase.auth().sendPasswordResetEmail(value.email).then(() => {
       this.successMessage = 'Consulter votre boite mail!!!'
-      this.navCtrl.navigateBack('/authent');
+      this.navCtrl.navigateBack('/auth');
 
     }).catch((err) => {
           this.errorMessage = 'Votre adresse mail est incorrect, veuillez le resaisir SVP!';
@@ -51,7 +51,7 @@ export class ResetPassPage implements OnInit {
   }
 
   goLoginPage(){
-    this.navCtrl.navigateBack('/authent');
+    this.navCtrl.navigateBack('/auth');
   }
 
 

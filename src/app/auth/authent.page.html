@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <ion-grid fixed>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" sizeSm="6" offsetSm="3">
+                <ion-card>
+                    <ion-card-content>
+                        <form [formGroup]="loginForm" (ngSubmit)="loginWithEmailPassword(loginForm.value)">
+                            <ion-item>
+                                <ion-label position="floating">Email</ion-label>
+                                <ion-input type="email" formControlName="email"></ion-input>
+                            </ion-item>
+                            <!--                            <div class="error-message">
+                                                            <ng-container *ngFor="let validation of validation_messages.email">
+                                                                <div class="error-message"
+                                                                     *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                                                                    {{ validation.message }}
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+
+                                                        <ion-item>
+                                                            <ion-label position="floating" color="primary">
+                                                                <ion-icon name="lock"></ion-icon>
+                                                                Mot de passe
+                                                            </ion-label>
+                                                            <ion-input type="password" formControlName="password" class="form-controll"
+                                                                       required></ion-input>
+                                                        </ion-item>
+                                                        <div class="validation-errors">
+                                                            <ng-container *ngFor="let validation of validation_messages.password">
+                                                                <div class="error-message"
+                                                                     *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                                                                    {{ validation.message }}
+
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>-->
+                            <div class="error-message">
+                                {{formError.email}}
+                            </div>
+                            <ion-item>
+                                <ion-label position="floating">Password</ion-label>
+                                <ion-input type="password" formControlName="password"></ion-input>
+                            </ion-item>
+                            <div class="error-message">
+                                {{formError.password}}
+                            </div>
+                            <ion-item lines="none">
+                                <ion-button color="dark" slot="end" fill="clear"
+                                            (click)="resetPassword(loginForm.value)">Forgot Password ?
+                                </ion-button>
+                            </ion-item>
+                            <ion-row>
+                                <ion-col size="12" sizeSm="6" offsetSm="3">
+                                    <ion-button color="success" expand="block" class="ion-margin-top" type="submit" [disabled]="loginForm.invalid">Login
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col  sizeSm="6" offsetSm="3">
+                                    <ion-button color="danger" expand="block" class="ion-margin-top"
+                                                (click)="googleLogin()">
+                                        <ion-icon name="logo-google"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col sizeSm="6" offsetSm="3">
+                                    <ion-button color="secondary" expand="block" class="ion-margin-top"
+                                                (click)="facebookLogin()">
+                                        <ion-icon name="logo-facebook" ></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-button color="light" expand="block" class="ion-margin-top" (click)="goToSignupPage()">
+                                Signup
+                            </ion-button>
+                        </form>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
