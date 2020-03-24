@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Item } from '../model/item';
-import { List } from '../model/list';
+import {Injectable} from '@angular/core';
+import {Item} from '../model/item';
+import {List} from '../model/list';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import * as firebase from 'firebase/app';
-import * as admin from 'firebase-admin';
-
 
 
 @Injectable()
@@ -35,7 +33,6 @@ export class TodoslistService {
 
   id: string;
   private userId: string;
-    readerbool: boolean;
 
   constructor(private db: AngularFirestore) {
     this.listtodos = new Array<List>();
@@ -118,26 +115,20 @@ export class TodoslistService {
    * renvoie une liste de todoList
    */
   public get(): Array<List> {
-    console.log("reades----------->");
+/*    console.log("reades----------->");
     console.log(this.listreaders);
     console.log(this.listwriters);
-    console.log("<-<-------->-->");
+    console.log("<-<-------->-->");*/
 
     return this.listtodos;
   }
 
-  public getReaders(){
+  public getReaders() {
     return this.listreaders;
   }
-  public getWriters(){
+  public getWriters() {
     return this.listwriters;
   }
-  /*public isToreader(list : List){
-    this.todolistCollection.doc(this.id).ref
-    return 
-
-  }
-*/
   public  getItems(): Observable<Array<Item>> {
     return this.todolistCollection.doc(this.id).collection<Item>('items').snapshotChanges().pipe( map(actions => {
       return actions.map((a: any) => {
@@ -164,9 +155,8 @@ export class TodoslistService {
    */
   addList(list: List) {
     this.userId = firebase.auth().currentUser.uid;
-    //console.log(this.usersCollection.doc(this.userId).get());
-    //console.log(this.userId);
-    console.log(list);
+    console.log(this.usersCollection.doc(this.userId).get());
+    console.log(this.userId);
     return this.todolistCollection.add(list);
 
   }
