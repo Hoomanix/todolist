@@ -20,19 +20,10 @@ export const SIGNUP = {
   }
 }
 
-export const ADDPRODUCT = {
-  name: {
-    required: 'Name is required',
-  },
-  price: {
-    required: 'Price is required',
-  },
-  size: {
-    required: 'Size is required',
-  },
-  brand: {
-    required: 'Brand is required',
-  },
+export const ADDTodoOrItem = {
+  title: {
+    required: 'Title is required',
+  }
 }
 
 export const EDITPRODUCT = {

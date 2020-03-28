@@ -4,21 +4,26 @@ import {RouterModule, Routes} from '@angular/router';
 import {TasksPage} from './tasks.page';
 
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/tasks/tabs/todoslist',
-        pathMatch: 'full'
-    },
+
     {
         path: 'tabs',
         component: TasksPage,
         children: [
+            {
+                path: '',
+                redirectTo: 'tabs/todoslist',
+                pathMatch: 'full'
+            },
             {
                 path: 'todoslist',
                 children: [
                     {
                         path: '',
                         loadChildren: './todoslist/todoslist.module#TodoslistPageModule'
+                    },
+                    {
+                        path: ':todolistId/:id',
+                        loadChildren: './todoslist/todo-item/todo-item.module#TodoItemPageModule'
                     },
 
                     {
@@ -29,10 +34,7 @@ const routes: Routes = [
                         path: 'addtodo',
                         loadChildren: './todoslist/addtodo/addtodo.module#AddtodoPageModule'
                     },
-                    {
-                        path: ':todolistId',
-                        loadChildren: './todoslist/todo-item/todo-item.module#TodoItemPageModule'
-                    }
+
                 ]
             },
             {
@@ -45,14 +47,14 @@ const routes: Routes = [
 
                 ]
             },
-            {
-                path: '',
-                redirectTo: '/tasks/tabs/todoslist',
-                pathMatch: 'full'
-            }
+
         ]
     },
-
+    {
+        path: '',
+        redirectTo: 'tabs/todoslist',
+        pathMatch: 'full'
+    }
 
 ];
 

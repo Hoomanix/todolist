@@ -1,4 +1,4 @@
-import {Platform, ToastController} from '@ionic/angular';
+import {AlertController, Platform, ToastController} from '@ionic/angular';
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -6,10 +6,11 @@ import {Injectable} from '@angular/core';
 })
 export class HelperService {
 
-    constructor(private platform: Platform, private toastController: ToastController) {
+    constructor(private platform: Platform, private toastController: ToastController
+        , private alertController: AlertController) {
     }
 
-    static prepareValidationMessage(form, validationMessage, formFields) {
+    static  prepareValidationMessage(form, validationMessage, formFields) {
         for (const field in formFields) {
             formFields[field] = '';
             const control = form.controls[field];
@@ -35,6 +36,16 @@ export class HelperService {
             position: this.platform.is('desktop') ? 'top' : 'bottom'
         });
         toast.present();
+    }
+
+    async presentAlertConfirm(header, message, buttons) {
+        const alert = await this.alertController.create({
+            header,
+            message,
+            buttons
+        });
+
+        await alert.present();
     }
 
 }

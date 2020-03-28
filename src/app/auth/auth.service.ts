@@ -10,7 +10,7 @@ import {HelperService} from '../services/helper.service';
 })
 export class AuthService {
     public isAuthenticated = true;
-    email: string;
+    a: string;
 
     constructor(private angularFireAuth: AngularFireAuth,
                 private router: Router,
@@ -51,7 +51,7 @@ export class AuthService {
                         }
                     },
                     err => reject(err)),
-                this.email = value.email;
+                this.a = value.email;
         });
     }
 

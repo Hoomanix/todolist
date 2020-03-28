@@ -3,10 +3,14 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth/auth.gaurd';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'tasks', pathMatch: 'full'},
+    {path: '', redirectTo: 'auth', pathMatch: 'full'},
     {
         path: 'auth',
         loadChildren: () => import('./auth/authent.module').then(m => m.AuthentPageModule)
+    },
+    {
+        path: 'tasks',
+        loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksPageModule)
     },
     {
         path: 'register',
@@ -24,11 +28,6 @@ const routes: Routes = [
         path: 'reset-pass',
         loadChildren: () => import('./reset-pass/reset-pass.module').then(m => m.ResetPassPageModule)
     },
-    {
-        path: 'tasks',
-        loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksPageModule)
-    },
-
 ];
 
 @NgModule({
