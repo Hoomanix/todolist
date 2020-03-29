@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {TodoslistService} from '../../../services/todoslist.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TodoslistService} from '../services/todoslist.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ADDTodoOrItem} from '../../../constants/formValidationMessage';
-import {HelperService} from '../../../services/helper.service';
-import {FirestoreDbService} from '../../../services/firestore-db.service';
+import {ADDTodoOrItem} from '../constants/formValidationMessage';
+import {HelperService} from '../services/helper.service';
+import {FirestoreDbService} from '../services/firestore-db.service';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {LoadingController} from '@ionic/angular';
 
 @Component({
   selector: 'app-additem',
@@ -35,14 +34,19 @@ export class AdditemPage implements OnInit {
   };
   validationMessage: any = ADDTodoOrItem;
   showAddTodoSpinner = false;
-
+  itemsId=''
 
   constructor(private listService: TodoslistService,
               private router: Router,
               private helperService: HelperService,
               private firestoreDbService: FirestoreDbService,
               private angularFireAuth: AngularFireAuth,
-              private loadingCtrl: LoadingController) {
+              private activatedRoute:ActivatedRoute) {
+
+    this.activatedRoute.params.subscribe(result => {
+      console.log('additem itemsId:', result.id);
+      this.itemsId = result.id;
+    });
   }
 
   ngOnInit() {
@@ -50,20 +54,22 @@ export class AdditemPage implements OnInit {
     this.createForm();
   }
 
-  async addItem(id) {
+  async addItem() {
     try {
-      console.log('id', id);
-      /*      await this.firestoreDbService.insertDataItem('todos', docid,'items', {
-              title: this.title.value,
-            });*/
+      this.showAddTodoSpinner = true;
+      await this.firestoreDbService.insertItem( this.itemsId,{
+        title: this.title.value,
+        isDone: false
+      });
       this.showAddTodoSpinner = false;
-      this.helperService.presentToast('Product Added Successfully!');
-      this.router.navigate(['/tasks/tabs/todoslist/todolistId', id]);
+      this.helperService.presentToast('Product Added Successfully! You can add another Item ');
+      this.resetForm();
     } catch (error) {
-      console.log('in add todo', error);
+      console.log(error);
       this.helperService.presentToast(error.message);
       this.showAddTodoSpinner = false;
     }
+
   }
 
   createFormControl() {
@@ -83,4 +89,10 @@ export class AdditemPage implements OnInit {
     this.formError = HelperService.prepareValidationMessage(this.addItemForm, this.validationMessage, this.formError);
   }
 
+  resetForm() {
+    this.addItemForm.reset();
+    this.formError = {
+      title: ''
+    };
+  }
 }

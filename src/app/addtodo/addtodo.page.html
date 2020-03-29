@@ -25,6 +25,8 @@
           <ion-button  expand="block" class="ion-margin-top" [disabled]="!addTodoForm.valid"
           (click)="addTodo()">
             Add Todo
+            <ion-spinner name="dots" *ngIf="showAddTodoSpinner"></ion-spinner>
+
           </ion-button>
             </ion-col>
           </ion-row>

@@ -10,24 +10,16 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class TodoslistService {
   private todolistCollection: AngularFirestoreCollection<List>;
-
-
-
   private usersCollection: AngularFirestoreCollection<any>;
   private todolistCollectionReader : AngularFirestoreCollection<List>;
   private todolistCollectionWriter : AngularFirestoreCollection<List>;
-  private   unsubtodos:any;
   private   unsubReaders:any;
   private   unsubWriter:any;
-
   private readers: Observable<Array<List>>;
   private writers: Observable<Array<List>>;
-
   public listreaders: Array<List>;
   public listwriters: Array<List>;
   id: string;
-  private userId: string;
-
   constructor(private db: AngularFirestore) {
     this.listreaders = new Array<List>();
     this.listwriters = new Array<List>();
@@ -68,15 +60,6 @@ export class TodoslistService {
     });
   }
 
-clean_list() {
-/*      this.itemlistCollection = null;
-    this.todolistCollection = null;*/
-    this.usersCollection = null;
-/*
-    this.listtodos = null;
-*/
-
-  }
 
   public getReaders() {
     return this.listreaders;
@@ -84,39 +67,6 @@ clean_list() {
   public getWriters() {
     return this.listwriters;
   }
-
-  public delete(list: List) {
-    console.log('supp');
-    console.log(list);
-/*
-    return this.todolistCollection.doc(list.id).delete();
-*/
-  }
-
-  /**
-   * ajoute une liste
-   * @param list
-   */
-  addList(list: List) {
-    this.userId = firebase.auth().currentUser.uid;
-    console.log(this.usersCollection.doc(this.userId).get());
-    console.log(this.userId);
-/*
-    return this.todolistCollection.add(list);
-*/
-
-  }
-
-  /**
-   * Ajoute un item dans ???
-   * @param item
-   */
-  addItem(item: Item) {
-/*
-    return this.todolistCollection.doc(this.id).collection('items').add(item);
-*/
-  }
-
 
     update(item: Item) {
       console.log('on est dans update');
@@ -155,9 +105,4 @@ clean_list() {
       );
     }
 
-  getUnsubscribe(){
-     this.unsubtodos.unsubscribe();
-     this.unsubReaders.unsubscribe();
-     this.unsubWriter.unsubscribe();
-  }
 }

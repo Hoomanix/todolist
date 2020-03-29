@@ -8,28 +8,28 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="mail" slot="start"></ion-icon>
-          <ion-label>Profile</ion-label>
-        </ion-item>
+          <ion-item routerLink="/profile">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-        <ion-item  routerLink="/tasks/tabs/todoslist/">
-          <ion-icon name="list" slot="start"></ion-icon>
-          <ion-label>My Tasks By Me</ion-label>
-        </ion-item>
+          <ion-item  routerLink='/tasks'>
+            <ion-icon name="list" slot="start"></ion-icon>
+            <ion-label>My Tasks By Me</ion-label>
+          </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-        <ion-item  routerLink="/tasks/tabs/shared-lists/">
-          <ion-icon name="share" slot="start"></ion-icon>
-          <ion-label>Shared With ME</ion-label>
-        </ion-item>
+          <ion-item  routerLink='/shared-lists'>
+            <ion-icon name="share" slot="start"></ion-icon>
+            <ion-label>Shared With ME</ion-label>
+          </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-        <ion-item (click)="onLogout()">
-          <ion-icon slot="start" name="exit"></ion-icon>
-          <ion-label>Logout</ion-label>
-        </ion-item>
+          <ion-item (click)="onLogout()">
+            <ion-icon slot="start" name="exit"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

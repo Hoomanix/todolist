@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {TodoslistService} from '../../../services/todoslist.service';
+import {TodoslistService} from '../services/todoslist.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HelperService} from '../../../services/helper.service';
-import {FirestoreDbService} from '../../../services/firestore-db.service';
-import {ADDTodoOrItem} from '../../../constants/formValidationMessage';
+import {HelperService} from '../services/helper.service';
+import {FirestoreDbService} from '../services/firestore-db.service';
+import {ADDTodoOrItem} from '../constants/formValidationMessage';
 import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
@@ -46,7 +46,8 @@ export class AddtodoPage implements OnInit {
 
   async addTodo() {
     try {
-      await this.firestoreDbService.insertData('todos', {
+      this.showAddTodoSpinner = true;
+      await this.firestoreDbService.insertTodo('todos', {
         title: this.title.value,
         owner: this.angularFireAuth.auth.currentUser.email/*, writers : { idWriter : angularFireAuth.auth.currentUser.email , readers : { }} as List ;*/
       });

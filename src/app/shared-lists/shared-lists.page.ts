@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TodoslistService} from '../../services/todoslist.service';
+import {TodoslistService} from '../services/todoslist.service';
 
 @Component({
   selector: 'app-shared-lists',

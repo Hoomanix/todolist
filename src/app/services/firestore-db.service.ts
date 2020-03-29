@@ -7,7 +7,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
     providedIn: 'root'
 })
 export class FirestoreDbService {
-
+    private ollectionItemId:string;
     constructor(private db: AngularFirestore,
                 private angularFireAuth: AngularFireAuth) {
     }
@@ -38,7 +38,8 @@ export class FirestoreDbService {
         );
     }
 
-    async insertData(collectionId, data) {
+
+    async insertTodo(collectionId, data) {
         try {
             const result = await this.db.collection(collectionId).add(data);
             return result;
@@ -46,33 +47,14 @@ export class FirestoreDbService {
             throw new Error(error);
         }
     }
-
-    /*
-        async insertDataItem(collectionId, docId, data) {
-            try {
-                db.collection('todos').doc(this.username).collection('booksList')
-                const result = await this.db.doc(`${collectionId}/${docId}`).update(data);
-
-                return result;
-            } catch (error) {
-                throw new Error(error);
-            }
+    async insertItem(docId,data) {
+        try {
+            const result = await this.db.collection(`${'todos'}/${docId}/${'items'}`).add(data);
+            return result;
+        } catch (error) {
+            throw new Error(error);
         }
-    */
-
-    /*    //for items
-        async getItems(collectionId, docId) {
-            try {
-                const result = await this.db.collection(collectionId).doc(docId).ref.get();
-                if (result.exists) {
-                    return result.data();
-                } else {
-                    throw new Error('Data not found with given id');
-                }
-            } catch (error) {
-                throw new Error(error);
-            }
-        }*/
+    }
 
     async updateData(collectionId, docId, updatedData) {
         try {

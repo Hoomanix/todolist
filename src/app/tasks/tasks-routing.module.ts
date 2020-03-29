@@ -6,53 +6,23 @@ import {TasksPage} from './tasks.page';
 const routes: Routes = [
 
     {
-        path: 'tabs',
+        path: 'tasks',
         component: TasksPage,
         children: [
             {
-                path: '',
-                redirectTo: 'tabs/todoslist',
-                pathMatch: 'full'
-            },
-            {
                 path: 'todoslist',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: './todoslist/todoslist.module#TodoslistPageModule'
-                    },
-                    {
-                        path: ':todolistId/:id',
-                        loadChildren: './todoslist/todo-item/todo-item.module#TodoItemPageModule'
-                    },
-
-                    {
-                        path: 'additem',
-                        loadChildren: './todoslist/additem/additem.module#AdditemPageModule'
-                    },
-                    {
-                        path: 'addtodo',
-                        loadChildren: './todoslist/addtodo/addtodo.module#AddtodoPageModule'
-                    },
-
-                ]
+                loadChildren: () => import('../todoslist/todoslist.module').then(m => m.TodoslistPageModule)
             },
             {
                 path: 'shared-lists',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: './shared-lists/shared-lists.module#SharedListsPageModule'
-                    }
-
-                ]
+                loadChildren: () => import('../shared-lists/shared-lists.module').then(m => m.SharedListsPageModule)
             },
 
         ]
     },
     {
         path: '',
-        redirectTo: 'tabs/todoslist',
+        redirectTo: 'tasks/todoslist',
         pathMatch: 'full'
     }
 

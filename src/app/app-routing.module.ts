@@ -3,7 +3,7 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth/auth.gaurd';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'auth', pathMatch: 'full'},
+    {path: '', redirectTo: 'tasks', pathMatch: 'full'},
     {
         path: 'auth',
         loadChildren: () => import('./auth/authent.module').then(m => m.AuthentPageModule)
@@ -11,6 +11,22 @@ const routes: Routes = [
     {
         path: 'tasks',
         loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksPageModule)
+    },
+    {
+        path: 'todo-item/:id',
+        loadChildren: () => import('./todo-item/todo-item.module').then(m => m.TodoItemPageModule)
+    },
+    {
+        path: 'addtodo',
+        loadChildren: () => import('./addtodo/addtodo.module').then(m => m.AddtodoPageModule)
+    },
+    {
+        path: 'additem/:id',
+        loadChildren: () => import('./additem/additem.module').then(m => m.AdditemPageModule)
+    },
+    {
+        path: 'shared-lists',
+        loadChildren: () => import('./shared-lists/shared-lists.module').then(m => m.SharedListsPageModule)
     },
     {
         path: 'register',
@@ -28,6 +44,11 @@ const routes: Routes = [
         path: 'reset-pass',
         loadChildren: () => import('./reset-pass/reset-pass.module').then(m => m.ResetPassPageModule)
     },
+    {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+    },
+
 ];
 
 @NgModule({

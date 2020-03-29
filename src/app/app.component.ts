@@ -32,6 +32,6 @@ export class AppComponent {
 
     onLogout() {
         this.authService.logoutUser();
-        this.router.navigateByUrl('/auth');
     }
+
 }

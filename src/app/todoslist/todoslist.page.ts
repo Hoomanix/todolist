@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {TodoslistService} from '../../services/todoslist.service';
-import {AuthService} from '../../auth/auth.service';
+import {TodoslistService} from '../services/todoslist.service';
+import {AuthService} from '../auth/auth.service';
 import {IonItemSliding, NavController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase';
-import {FirestoreDbService} from '../../services/firestore-db.service';
-import {HelperService} from '../../services/helper.service';
+import {FirestoreDbService} from '../services/firestore-db.service';
+import {HelperService} from '../services/helper.service';
 
 @Component({
   selector: 'app-todoslist',
@@ -51,7 +51,7 @@ export class TodoslistPage implements OnInit {
   }
 
     getItems(id) {
-        this.router.navigate(['/tasks/tabs/todoslist/todolistId', id]);
+        this.router.navigate(['/todo-item', id]);
 
     }
 
@@ -68,7 +68,7 @@ export class TodoslistPage implements OnInit {
     }
 
     OpenAddTodoPage() {
-        this.router.navigate(['/tasks/tabs/todoslist/addtodo']);
+        this.router.navigate(['/addtodo']);
     }
     handleRefresher(event) {
         if (event) {

@@ -38,6 +38,7 @@ export class AuthService {
             });
     }
 
+
     loginWithEmailPassword(value) {
         return new Promise<any>((resolve, reject) => {
             this.angularFireAuth.auth.signInWithEmailAndPassword(value.email, value.password)
@@ -60,17 +61,15 @@ export class AuthService {
             if (this.angularFireAuth.auth.currentUser) {
                 this.angularFireAuth.auth.signOut()
                     .then(() => {
+                        this.router.navigateByUrl('/auth');
                         console.log('LOG Out');
                         resolve();
-                        this.todolistservice.getUnsubscribe();
-                        this.todolistservice.clean_list();
                     }).catch((error) => {
                     reject();
                 });
             }
         });
     }
-
 
     userDetails() {
         return this.angularFireAuth.auth.currentUser;

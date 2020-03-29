@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tasks/tabs/todoslist/todolistId"></ion-back-button>
+      <ion-back-button defaultHref="/todo-item/:id"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -24,8 +24,9 @@
           <ion-row>
             <ion-col  sizeSm="6" offsetSm="3" class="ion-margin">
               <ion-button  expand="block" class="ion-margin-top" [disabled]="!addItemForm.valid"
-                           (click)="addItem($event)">
-                Add item
+                           (click)="addItem()">
+                Add Item
+                <ion-spinner name="dots" *ngIf="showAddTodoSpinner"></ion-spinner>
               </ion-button>
             </ion-col>
           </ion-row>

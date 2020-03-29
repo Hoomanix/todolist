@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {TodoslistService} from '../../../services/todoslist.service';
-import {AuthService} from '../../../auth/auth.service';
-import {Item} from '../../../model/item';
+import {TodoslistService} from '../services/todoslist.service';
+import {AuthService} from '../auth/auth.service';
+import {Item} from '../model/item';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FirestoreDbService} from '../../../services/firestore-db.service';
-import {HelperService} from '../../../services/helper.service';
+import {FirestoreDbService} from '../services/firestore-db.service';
+import {HelperService} from '../services/helper.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
@@ -24,20 +24,21 @@ export class TodoItemPage implements OnInit {
               private firestoreDbService: FirestoreDbService,
               private helperService: HelperService,
               private router: Router,
-              private firestore: AngularFirestore
+              private firestore: AngularFirestore,
   ) {
     this.activatedRoute.params.subscribe(result => {
-      console.log('todo-item.page.ts==', result.id);
+      console.log('todo-item.page todoItemsId:', result.id);
       this.todoId = result.id;
+
       this.getItems();
     });
   }
 
-  async ngOnInit() {
+   ngOnInit() {
   }
 
-  async getItems() {
-    this.firestoreDbService.getItems(this.todoId).subscribe(result => {
+   getItems() {
+   this.firestoreDbService.getItems(this.todoId).subscribe(result => {
       console.log('result', result);
       this.itemsList = result;
       this.todoDetail = result;
@@ -49,7 +50,7 @@ export class TodoItemPage implements OnInit {
 
 
   OpenAddItemPage() {
-    this.router.navigate(['/tasks/tabs/todoslist/additem']);
+    this.router.navigate(['/additem',this.todoId]);
   }
 
   /*  delete(pos: number) {
