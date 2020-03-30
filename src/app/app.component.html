@@ -25,12 +25,16 @@
             <ion-label>Shared With ME</ion-label>
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle >
+          <app-location-picker></app-location-picker>
+        </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item (click)="onLogout()">
+          <ion-item button (click)="onLogout()">
             <ion-icon slot="start" name="exit"></ion-icon>
             <ion-label>Logout</ion-label>
           </ion-item>
         </ion-menu-toggle>
+
       </ion-list>
     </ion-content>
   </ion-menu>

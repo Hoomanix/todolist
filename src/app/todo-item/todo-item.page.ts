@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FirestoreDbService} from '../services/firestore-db.service';
 import {HelperService} from '../services/helper.service';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {IonItemSliding} from '@ionic/angular';
 
 @Component({
   selector: 'app-todo-item',
@@ -15,8 +16,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 
 
 export class TodoItemPage implements OnInit {
-  todoId = '';
-  todoDetail: any = {};
+  todoItemsId = '';
   private itemsList: Array<any> = [];
 
   constructor(private listService: TodoslistService, private authservice: AuthService,
@@ -24,11 +24,10 @@ export class TodoItemPage implements OnInit {
               private firestoreDbService: FirestoreDbService,
               private helperService: HelperService,
               private router: Router,
-              private firestore: AngularFirestore,
   ) {
     this.activatedRoute.params.subscribe(result => {
       console.log('todo-item.page todoItemsId:', result.id);
-      this.todoId = result.id;
+      this.todoItemsId = result.id;
 
       this.getItems();
     });
@@ -38,10 +37,9 @@ export class TodoItemPage implements OnInit {
   }
 
    getItems() {
-   this.firestoreDbService.getItems(this.todoId).subscribe(result => {
+   this.firestoreDbService.getItems(this.todoItemsId).subscribe(result => {
       console.log('result', result);
       this.itemsList = result;
-      this.todoDetail = result;
     }, (error) => {
       this.helperService.presentToast(error.message);
       console.log('in getItems ', error.message);
@@ -50,14 +48,35 @@ export class TodoItemPage implements OnInit {
 
 
   OpenAddItemPage() {
-    this.router.navigate(['/additem',this.todoId]);
+    this.router.navigate(['/additem',this.todoItemsId]);
   }
 
-  /*  delete(pos: number) {
-      // tslint:disable-next-line:no-shadowed-variable
-      this.listService.delete(this.items[pos]);
-      this.listService.get();
-    }*/
+    deleteItem(itemId: string,itemTitle:string, slidingItem: IonItemSliding) {
+        this.helperService.presentAlertConfirm(
+            'Delete Product',
+            `Are you sure you want to delete ${itemTitle}`,
+            [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: (blah) => {
+                    }
+                }, {
+                text: 'Yes',
+                handler: async () => {
+                    try {
+                        await this.firestoreDbService.deleteItem(itemId,this.todoItemsId);
+                        this.helperService.presentToast('Todo Deleted Successfully!');
+                        slidingItem.close();
+                    } catch (error) {
+                        this.helperService.presentToast(error.message);
+                        console.log('Error in Delete Todo', error);
+                    }
+                }
+            }
+            ]
+        );
+    }
 
 
   changeCheckState(item: Item) {

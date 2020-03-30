@@ -59,7 +59,6 @@ export class TodoslistPage implements OnInit {
         this.firestoreDbService.getTodos('todos').subscribe(result => {
             console.log('result', result);
             this.todoList = result;
-            this.todoDetail = result;
             this.handleRefresher(event);
         }, (error) => {
             this.helperService.presentToast(error.message);
@@ -103,10 +102,10 @@ export class TodoslistPage implements OnInit {
         this.router.navigate(['/share-todo']);
     }
 
-    deleteTodo(id: string, slidingItem: IonItemSliding) {
+    deleteTodo(id: string, todoTitle:string, slidingItem: IonItemSliding) {
         this.helperService.presentAlertConfirm(
             'Delete Product',
-            `Are you sure you want to delete ${this.todoDetail.title}`,
+            `Are you sure you want to delete ${todoTitle}`,
             [
                 {
                     text: 'No',

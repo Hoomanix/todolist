@@ -7,7 +7,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
     providedIn: 'root'
 })
 export class FirestoreDbService {
-    private ollectionItemId:string;
     constructor(private db: AngularFirestore,
                 private angularFireAuth: AngularFireAuth) {
     }
@@ -18,7 +17,7 @@ export class FirestoreDbService {
                 return actions.map(doc => {
                     const data = doc.payload.doc.data();
                     const id = doc.payload.doc.id;
-                    console.log('id', id, 'data', data.valueOf());
+                    console.log('todo.id', id, 'todo.data', data.valueOf());
                     return {id, ...data};
                 });
             })
@@ -31,7 +30,7 @@ export class FirestoreDbService {
                 return actions.map(doc => {
                     const data = doc.payload.doc.data();
                     const id = doc.payload.doc.id;
-                    console.log('id2 ', id, 'data2 ', data.valueOf());
+                    console.log('item.id', id, 'item.data ', data.valueOf());
                     return {id, ...data};
                 });
             })
@@ -68,6 +67,15 @@ export class FirestoreDbService {
     async deleteTodo(collectionId, docId) {
         try {
             const result = await this.db.doc(`${collectionId}/${docId}`).delete();
+            return result;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async deleteItem(itemId, todoItemsId) {
+        try {
+            const result = await this.db.doc(`todos/${todoItemsId}/items/${itemId}`).delete();
             return result;
         } catch (error) {
             throw new Error(error);

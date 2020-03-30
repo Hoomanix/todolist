@@ -24,6 +24,8 @@ import {Facebook} from '@ionic-native/facebook/ngx';
 import {Camera} from '@ionic-native/camera/ngx';
 import {ResetPassPageModule} from './reset-pass/reset-pass.module';
 import {HelperService} from './services/helper.service';
+import {Geolocation} from '@capacitor/core';
+import {SharedModule} from './shared/shared.module';
 
 firebase.initializeApp(environment.firebase);
 
@@ -39,7 +41,8 @@ firebase.initializeApp(environment.firebase);
         AngularFirestoreModule,
         AngularFireStorageModule,
         ReactiveFormsModule,
-        ResetPassPageModule],
+        ResetPassPageModule,
+    SharedModule],
 
     providers: [
         StatusBar,
