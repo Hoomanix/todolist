@@ -1,0 +1,7 @@
+{
+  "name": "M2PGI-TODO-LIST",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

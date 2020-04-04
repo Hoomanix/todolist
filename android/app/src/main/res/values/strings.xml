@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TodoKeep</string>
+    <string name="title_activity_main">TodoKeep</string>
+    <string name="package_name">com.somnadia.todokeep</string>
+    <string name="custom_url_scheme">com.somnadia.todokeep</string>
+</resources>
