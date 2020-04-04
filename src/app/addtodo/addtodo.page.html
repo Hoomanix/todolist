@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="danger" slot="start">
+      <ion-back-button defaultHref="/todoslist"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Créer une Liste
+      </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeSm="6" offsetSm="4">
+       
+        <form (ngSubmit)="addList()" #addListForm="ngForm">
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-button (click)="startvoca1()" float-right> <ion-icon name="microphone"></ion-icon>
+            </ion-button>
+            <ion-item>
+              <ion-label position="floating" color="black">Entrer un titre de liste
+                <ion-text color="black">*</ion-text>
+              </ion-label>
+            <ion-input required id="title" type="text" class="form-controll" name="title" [(ngModel)]="title" #ctrlTitle="ngModel">
+              </ion-input>
+              
+            </ion-item>
+            <ion-text [hidden]="ctrlTitle.valid || ctrlTitle.pristine " color="danger">Titre obligatoire</ion-text>
+
+          </ion-list>    
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addListForm.valid">
+              Ajouter</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+

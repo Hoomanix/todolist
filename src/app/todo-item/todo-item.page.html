@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="danger" slot="start">
+      <ion-back-button defaultHref="/todoslist"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Liste des tâches
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="OpenAddItemPage()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+
+  <ion-list>
+    <ion-reorder-group disabled="false" >
+    <ion-item-sliding *ngFor="let item of items; let i = index">
+      <ion-item *ngIf="!item.isDone">
+        <ion-checkbox (ionChange)="changeCheckState(item)" [disabled]="readerbool" [(ngModel)]="item.isDone"
+          color="danger" slot="start"></ion-checkbox>
+        <ion-label>
+          <h2> tâche : {{item.title}}</h2>
+          <p> {{item.description}}</p>
+        </ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+
+      <ion-item *ngIf="item.isDone" style="text-decoration:line-through;">
+        <ion-checkbox (ionChange)="changeCheckState(item)" [disabled]="readerbool" [(ngModel)]="item.isDone"
+          color="danger" slot="start"></ion-checkbox>
+        <ion-label>
+          <h2> tâche : {{item.title}}</h2>
+          <ion-text> {{item.description}}</ion-text>
+        </ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+      <ion-item-options *ngIf="!readerbool" side="end">
+        <ion-item-option color="success" (click)="EditItem(item,item.title)">
+          <ion-icon slot="top" name="create"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteItem(item.id,item.title)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-reorder-group>
+  </ion-list>
+  <section>
+
+
+  </section>
+</ion-content>

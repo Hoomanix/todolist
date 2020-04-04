@@ -1,0 +1,43 @@
+<ion-app >
+  <ion-menu side="start" menuId="menu_1">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item routerLink="/profile">
+             <ion-icon name="contact"  slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  routerLink='todoslist'>
+            <ion-icon name="list" slot="start"></ion-icon>
+            <ion-label>Mes liste de tâches</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  routerLink='/shared-lists'>
+            <ion-icon name="share" slot="start"></ion-icon>
+            <ion-label>Paratagée(s) avec moi</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle >
+          <app-location-picker></app-location-picker>
+        </ion-menu-toggle>
+       
+        <ion-menu-toggle>
+          <ion-item button (click)="onLogout()">
+            <ion-icon slot="start" name="exit"></ion-icon>
+            <ion-label>Déconnexion</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>

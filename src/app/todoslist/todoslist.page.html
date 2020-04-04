@@ -1,0 +1,100 @@
+
+
+  <ion-header >
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button menu="menu_1"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Mes Listes de tâches  </ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="AddTodo()">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-searchbar placeholder="Chercher" (ionInput)="getItemssearch($event)"></ion-searchbar>
+    <ion-refresher slot="fixed" (ionRefresh)="getList($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" sizeSm="8" offsetSm="2">
+                <ion-list *ngIf="search ; else notsearch" >
+                    <ion-item-sliding *ngFor="let todo of filterData" #slidingItem>
+                        <ion-item  detail="true"  >
+                            <ion-label (click)="AfficherTodo(todo.id)">
+                                {{todo.title}}
+                            </ion-label>
+                            
+                            <ion-item slot="end">
+                                <ion-button color="dark" slot="end" (click)=shareTodo(todo?.id)>
+                                    <ion-icon name="share"></ion-icon>
+                                  </ion-button>  
+                            </ion-item>
+                        </ion-item>
+                       
+                        <ion-item-options side="end">
+                            
+                            <ion-item-option color="danger" (click)="deleteTodo(todo.id,todo.title)">
+                                <ion-icon slot="top" name="trash"></ion-icon>
+                            </ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-list>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</ion-content>
+
+
+
+
+  
+  <ion-footer>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="/">
+      <ion-label>Mes Listes</ion-label>
+      <ion-icon name="calendar"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="goShare()">
+      <ion-label>Partagée(s) avec moi
+      </ion-label>
+      <ion-icon name="share"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
+
+<ng-template #notsearch>
+   
+    <ion-item-sliding *ngFor="let todo of getList(); let i = index">
+       
+            
+            <ion-item  detail="true"  >
+                <ion-label (click)="AfficherTodo(todo.id)">
+                    {{todo.title}}
+                </ion-label>
+                
+                <ion-item slot="end">
+                    <ion-button color="dark" slot="end" (click)=shareTodo(todo?.id)>
+                        <ion-icon name="share"></ion-icon>
+                      </ion-button>  
+                </ion-item>
+            </ion-item>
+           
+            <ion-item-options side="end">
+                
+                <ion-item-option color="danger" (click)="deleteTodo(todo.id,todo.title)">
+                    <ion-icon slot="top" name="trash"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+           
+        
+    </ion-item-sliding>
+  </ng-template>

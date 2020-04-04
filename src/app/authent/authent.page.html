@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar hideBackButton color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="form" [formGroup]="validationsform"  (ngSubmit)="loginUser(validationsform.value)">
+
+    <ion-item>
+      <ion-label  position="floating" color="primary"><ion-icon slot="start" name="at"></ion-icon>Email </ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="validationsform.get('email').hasError(validation.type) && (validationsform.get('email').dirty || validationsform.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label  position="floating" color="primary"><ion-icon name="lock"></ion-icon> Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message" *ngIf="validationsform.get('password').hasError(validation.type) && (validationsform.get('password').dirty || validationsform.get('password').touched)">
+          {{ validation.message }}
+
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="none">
+      <ion-button color="black" slot="end" fill="clear" (click)="resetPassword(validationsform.value)">Mot de passe oublié ?</ion-button>
+    </ion-item>
+    <ion-button color="black" expand="block" shape="round" fill="outline" class="submit-btn" type="submit"  [disabled]="!validationsform.valid" >Connexion</ion-button>
+    <br>
+    <ion-button color="primary" expand="block" shape="round" (click)="goToRegisterPage()" >Inscription</ion-button>
+    <ion-item lines="none">
+      <ion-label color="primary" text-center>Ou </ion-label>
+    </ion-item>
+   <!-- <ion-button  class="submit-btn" type="submit"  [disabled]="!validationsform.valid">Log In</ion-button>-->
+    <ion-button color="primary" expand="block" shape="round" (click)="loginwithgoogle()" >Google <ion-icon name="logo-google"></ion-icon></ion-button>
+    <ion-button color="primary" expand="block" shape="round" (click)="loginwithfacebook()">Facebook<ion-icon name="logo-facebook"></ion-icon></ion-button>
+
+
+   <!-- <ion-button (click)="loginwithgoogle()" > <ion-icon name="logo-google" ></ion-icon></ion-button>
+    <ion-button (click)="loginwithfacebook()"> <ion-icon name="logo-facebook"></ion-icon></ion-button>
+    <ion-button (click)="resetPassword(validationsform.value)">mot de passe oublie</ion-button>-->
+
+    <label class="error-message">{{errorMessage}}</label>
+  </form>
+ <!-- <p class="go-to-register">
+    No account yet? <a (click)="goToRegisterPage()">Create an account.</a>
+  </p>-->
+
+
+</ion-content>

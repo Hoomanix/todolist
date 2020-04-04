@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="danger" slot="start">
+      <ion-back-button defaultHref="/todoItem"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Ajouter une tâche
+      </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeSm="6" offsetSm="5">
+        <form (ngSubmit)="addItem()" #addListForm="ngForm">
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            
+            <ion-button (click)="startvoca1()" float-right> <ion-icon name="microphone"></ion-icon>
+            </ion-button>
+            <ion-item>
+              <ion-label position="stacked">Titre <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input required id="title" type="text" name="title" [(ngModel)]="title" #ctrlTitle="ngModel">
+              </ion-input>
+              <ion-text [hidden]="ctrlTitle.valid || ctrlTitle.pristine " color="danger">Titre obligatoire</ion-text>
+            </ion-item>
+        
+        
+            <ion-button (click)="startvoca2()" float-right> <ion-icon name="microphone"></ion-icon>
+            </ion-button>
+            <ion-item>
+              <ion-label position="stacked">Déscription <ion-text color="danger"></ion-text>
+              </ion-label>
+              <ion-input  id="desc" type="text" name="desc" [(ngModel)]="desc" #ctrlDesc="ngModel">
+              </ion-input>
+              <ion-text [hidden]="ctrlDesc.valid || ctrlDesc.pristine " color="danger">Desciption obligatoire</ion-text>
+              
+            </ion-item>
+          </ion-list>
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addListForm.valid">
+              Ajouter</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

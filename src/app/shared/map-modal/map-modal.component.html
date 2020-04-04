@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pick Location</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" >
+  <div #map id='map' [hidden]="!user"></div>
+  <div *ngIf="user">
+
+    <ion-button expand="block" class="ion-margin" (click)="startTracking()" *ngIf="!isTracking">
+      <ion-icon name="locate" slot="start">
+        Start Tracking
+      </ion-icon>
+    </ion-button>
+
+    <ion-button expand="block" (click)="stopTracking()" *ngIf="isTracking">
+      <ion-icon name="hand" slot="start">
+        Stop Tracking
+      </ion-icon>
+    </ion-button>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let pos of locations | async" #slidingItem>
+        <ion-item>
+          <ion-label class="ion-text-wrap">
+            Lat:{{pos.lat}}
+            Lng:{{pos.lng}}
+            <p>
+              {{pos.timestamp | date: 'short'}}
+            </p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="deleteLocation(pos,slidingItem)">
+            <ion-icon slot="top" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

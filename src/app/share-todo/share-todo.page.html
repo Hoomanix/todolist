@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="danger" slot="start">
+      <ion-back-button defaultHref="/todoslist"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        Partager une liste
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeSm="6" offsetSm="4">
+       
+        <form class="form"  (ngSubmit)="addUser()" [formGroup]="validationsform" >
+          <ion-item>
+            <ion-label position="stacked">Partager avec : saisir une adresse mail <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required id="email"  formControlName="email" type="email" name="title" [(ngModel)]="readerwriter">
+            </ion-input>
+            
+            
+          </ion-item>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="validationsform.get('email').hasError(validation.type) && (validationsform.get('email').dirty || validationsform.get('email').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          <ion-item>
+            <ion-label>Patage de liste en mode : </ion-label>
+            <ion-select value="Lecteur" [(ngModel)]="carbrand"  #ctrlTitle="ngModel"  [ngModelOptions]="{standalone: true}" (ngModelChange)="onChange(carbrand)">
+              <ion-select-option value="Lecteur">Lecteur</ion-select-option>
+              <ion-select-option value="Editeur">Editeur</ion-select-option>
+            </ion-select>
+          </ion-item>
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!validationsform.valid">
+            partager </ion-button>
+        </div>
+      </form>
+    
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  
+</ion-content>
+

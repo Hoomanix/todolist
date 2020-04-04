@@ -1,0 +1,137 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-buttons>
+                <ion-menu-button menu="menu_1"></ion-menu-button>
+            </ion-buttons>
+        </ion-buttons>
+        <ion-title>Shared Lists</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+    <ion-searchbar placeholder="Chercher" (ionInput)="getItemssearch($event)"></ion-searchbar>
+
+    <ion-list *ngIf="getListReaders().length>0 ; else contenu_pas_bon">
+        <ion-item>
+          <ion-label color="danger">
+            Partagée(s) avec moi en Lecture
+          </ion-label>
+        </ion-item>
+        <ion-list  *ngIf="search ; else notsearchR" >
+          <ion-item-sliding *ngFor="let item of filterDataR; let i = index">
+            <ion-item>
+              <ion-label (click)="Afficherhtml2(item?.id,'reader')">
+                <h2> {{ item?.title}}</h2>
+              </ion-label>
+            </ion-item>
+    
+          </ion-item-sliding>
+        </ion-list>
+        
+      </ion-list>
+  
+  
+      <ion-list *ngIf="getListWriters().length>0; else contenu_pas_vide">
+        <ion-item>
+          <ion-label color="danger">
+            Partagée(s) avec moi en Ecriture
+          </ion-label>
+        </ion-item>
+        <ion-list *ngIf="search ; else notsearchW">
+          <ion-item-sliding *ngFor="let item of filterDataW; let i = index">
+            <ion-item>
+              <ion-label (click)="AfficherTodo(item?.id)">
+                <h2> {{ item?.title}}</h2>
+              </ion-label>
+              <!-- <ion-button color="dark" (click)=shareTodo(item?.id)>
+                <ion-icon name="share"></ion-icon>
+              </ion-button>-->
+            </ion-item>
+    
+    
+            <ion-item-options side="end">
+    
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+       
+      </ion-list>
+    
+</ion-content>
+
+
+<ion-footer>
+
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="onlist()">
+            <ion-label>Mes Listes</ion-label>
+            <ion-icon name="calendar"></ion-icon>
+        </ion-tab-button>
+
+        <ion-tab-button tab="/">
+            <ion-label>Partagée(s) avec moi</ion-label>
+            <ion-icon name="share"></ion-icon>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-footer>
+
+
+<ng-template #contenu_pas_bon>
+    <ion-item>
+      <ion-label color="danger">
+        Partagé avec moi en Lecture
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        (vide)
+      </ion-label>
+    </ion-item>
+  </ng-template>
+
+  <ng-template #contenu_pas_vide>
+    <ion-item>
+      <ion-label color="danger">
+        Partagé avec moi en Ecriture
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        (vide)
+      </ion-label>
+    </ion-item>
+  </ng-template>
+
+
+  <ng-template #notsearchR>
+    <ion-item-sliding *ngFor="let item of getListReaders(); let i = index">
+      <ion-item>
+        <ion-label (click)="Afficherhtml2(item?.id,'reader')">
+          <h2>{{item?.title}}</h2>
+        </ion-label>
+        <ion-button color="dark" (click)=shareTodo(item?.id)>
+          <ion-icon name="share"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-item-sliding>
+  </ng-template>
+
+  <ng-template #notsearchW>
+    <ion-item-sliding *ngFor="let item of getListWriters(); let i = index">
+      <ion-item>
+        <ion-label (click)="AfficherTodo(item?.id)">
+          <h2> {{ item?.title}}</h2>
+        </ion-label>
+        <!-- <ion-button color="dark" (click)=shareTodo(item?.id)>
+          <ion-icon name="share"></ion-icon>
+        </ion-button>-->
+      </ion-item>
+
+
+      <ion-item-options side="end">
+
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-template>

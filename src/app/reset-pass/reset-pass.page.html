@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+  <form class="form" [formGroup]="validationsform" (ngSubmit)="resetPassword(validationsform.value)">
+
+    <ion-item>
+      <ion-label  position="floating" color="primary"> <ion-icon slot="start" name="at"></ion-icon> Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="validationsform.get('email').hasError(validation.type) && (validationsform.get('email').dirty || validationsform.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <br>
+    <ion-button color="black" expand="block" shape="round" fill="outline" class="submit-btn" type="submit"  [disabled]="!validationsform.valid" >Envoyer</ion-button>
+
+    <!--
+        <ion-button  class="submit-btn" type="submit"  [disabled]="!validationsform.valid">Register</ion-button>
+    -->
+    <ion-label class="error-message"  color="danger">{{errorMessage}}</ion-label>
+    <ion-label class="success-message" color="success">{{successMessage}}</ion-label>
+    <ion-item lines="none">
+      <ion-button color="black" slot="end" fill="clear" (click)="goLoginPage()">Se Connecter?</ion-button>
+    </ion-item>
+  </form>
+  <!--<ion-label class="go-to-login">Register?
+    <a (click)="goLoginPage()">Try to Log In.</a>
+
+  </ion-label>-->
+</ion-content>
